@@ -1,0 +1,33 @@
+@gasUri=https://script.google.com/macros/s/AKfycbweqTQW_UtclisOKRi4eBi_tsoTk1K3SBCQnSqTa4Z5EdxIeB5gGnug9j2UQ6ZcQMLyHQ/exec
+
+### get test
+GET {{gasUri}}
+
+### doPost テスト（1件送信）
+POST {{gasUri}}
+Content-Type: application/json
+
+[
+    {
+        "id": 111,
+        "name": "gas test",
+        "score": 90
+    }
+]
+
+### doPost テスト（複数件送信）
+POST {{gasUri}}
+Content-Type: application/json
+
+[
+    {
+        "id": 112,
+        "name": "user2",
+        "score": 80
+    },
+    {
+        "id": 113,
+        "name": "user3",
+        "score": 70
+    }
+]
