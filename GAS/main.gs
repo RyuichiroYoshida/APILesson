@@ -29,12 +29,21 @@ function doPost(e) {
 		return ContentService.createTextOutput(JSON.stringify({ error: "Invalid JSON" })).setMimeType(ContentService.MimeType.JSON);
 	}
 
-	// ヘッダー取得（未使用だが、今後の拡張用）
+	// ヘッダー取得
 	const headers = sheet.getDataRange().getValues()[0];
 
-	// 各行を書き込み
+	// dataが配列でなければ配列化
+	if (!Array.isArray(data)) {
+		data = [data];
+	}
+
+	// 各行を書き込み（ヘッダー順に値を並べる）
 	data.forEach(function (rowObj) {
-		sheet.appendRow(rowObj);
+		// ヘッダー順に値を配列化
+		const row = headers.map(function (key) {
+			return rowObj[key];
+		});
+		sheet.appendRow(row);
 	});
 	// 書き込み後の全データを返す
 	return getRecordsAsJson();
